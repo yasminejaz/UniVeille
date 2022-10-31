@@ -2,7 +2,8 @@
 
 Univeille est une plateforme Web de veille de vulnérabilités afin de notifier les entreprises clientes en amont et en continu des nouvelles vulnérabilités de sécurité qui risquent d'affecter leurs actif applicatifs et améliorer leurs processus de gestion de vulnérabilités.
 
-
+![Schema_image](images/presentative1.png)
+![Schema_image](images/explorer.png)
 
 # Fonctionnalités 
 
@@ -18,7 +19,7 @@ Notre solution collecte les informations sur les vulnérabilités de huits sourc
     7. Cisco Flux RSS,
     8. Zero Day Intiative Flux RSS.
    
-   /* Schema source */
+   ![Schema_image](images/source.png)
    
   ### Données sur UNE vulnérabilité:
     . CVE ID,
@@ -29,11 +30,12 @@ Notre solution collecte les informations sur les vulnérabilités de huits sourc
     . Description,
     . Produit(s) affecté(s),
     . Date publication / modification.
-   
+    
+   ![Schema_image](images/explorer2.png)
 
 ## - Cartographier les actifs applicatifs 
 Notre solution permet aux clients de cartographier leurs actifs applicatifs et ce maniere manuelle ou automatique à l'aide de notre application Desktop qui permet de scanner et collecter les information sur les applications installées sur la machine (Vendor, Product, Version) et les envoyer à la base de données à l'aide d'une REST API.
- /* Capture application */
+![Schema_image](images/loginapp.png)
 
 
 ## - Notification des nouvelles vulnérabilités 
