@@ -36,7 +36,7 @@ Notre solution collecte les informations sur les vulnérabilités de huits sourc
 ## - Cartographier les actifs applicatifs 
 Notre solution permet aux clients de cartographier leurs actifs applicatifs et ce maniere manuelle ou automatique à l'aide de notre application Desktop qui permet de scanner et collecter les information sur les applications installées sur la machine (Vendor, Product, Version) et les envoyer à la base de données à l'aide d'une REST API.
 ![Schema_image](images/loginapp.png)
-![Schema_image](images/envoie_done.png)
+![Schema_image](images/envoiedone.png)
 
 
 ## - Notification des nouvelles vulnérabilités 
