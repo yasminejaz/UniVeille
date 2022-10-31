@@ -8,7 +8,7 @@ Univeille est une plateforme Web de veille de vulnérabilités afin de notifier 
 
 # Fonctionnalités 
 
-## Collecte de données sur les vulnérabilités
+## - Collecte de données sur les vulnérabilités
 Notre solution collecte les informations sur les vulnérabilités de huits sources differenetes à savoir:
 
   	1. NVD API,
@@ -33,12 +33,12 @@ Notre solution collecte les informations sur les vulnérabilités de huits sourc
     . Date publication / modification.
    
 
-## Cartographier les actifs applicatifs 
+## - Cartographier les actifs applicatifs 
 Notre solution permet aux clients de cartographier leurs actifs applicatifs et ce maniere manuelle ou automatique à l'aide de notre application Desktop qui permet de scanner et collecter les information sur les applications installées sur la machine (Vendor, Product, Version) et les envoyer à la base de données à l'aide d'une REST API.
  /* Capture application */
 
 
-## Notification des nouvelles vulnérabilités 
+## - Notification des nouvelles vulnérabilités 
 Les entreprises clientes sont notifiées des nouvelles vulnérabilités (a chaque insertion de cette derniere dans la base de données) en fonction de leurs systemes, leurs version et la priorité de l'actif , ainsi que, le niveau de criticité de la vulnérabilité. 
 
 
