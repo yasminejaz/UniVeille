@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UniVeille - Se connecter </title>
+    <link rel="stylesheet" type="text/css" href="{% static 'inscription_login.css' %}" />
+
+</head>
+<body>
+<div class="container">
+    <main class="signup-container">
+        <h1 class="heading-primary">Se connecter<span class="span-blue">.</span></h1>
+        <p class="text-mute">Veuillez Saisir vos identifiants pour accéder à votre compte.</p>
+        <p style="color: red">{{ error }} </p>
+        {% block content %}
+        <form class="signup-form" method="POST"  action="{% url 'login' %}" >
+{%csrf_token%}
+                <label class="inp">
+        <input type="email" class="input-text" placeholder="&nbsp;" required name="email">
+        <span class="label">Email</span>
+
+      </label>
+      <label class="inp">
+        <input type="password" class="input-text" placeholder="&nbsp;" required id="password" name="password">
+        <span class="label">Mot de passe</span>
+
+      </label>
+      <input class="btn btn-login"  type="submit" value="Se connecter " ></input>
+
+         </form>
+        {% endblock %}
+      <p class="text-mute">Vous avez pas un compte? <a href="/accounts/signup">S'inscrire</a></p>
+
+  </main>
+  <div class="welcome-container">
+      <h1 class="heading-secondary"><span class="lg">Platforme de veille &ensp;&ensp; des vulnérabilités</span></h1>
+  </div>
+
+
+</div>
+</body>
+</html>

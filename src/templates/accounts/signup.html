@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UniVeille - Inscription</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'sign_up.css' %}" />
+
+</head>
+<body>
+<div class="container">
+
+  <div class="welcome-container">
+    <h1 class="heading-secondary"> <span class="lg">Platforme de veille des vulnérabilités  </span></h1>
+     </div>
+
+    <main class="signup-container">
+    <h1 class="heading-primary">Créer un compte <span class="custom-dot">.</span></h1>
+    <p class="text-mute">Avez vous déjà un compte? <a href="/login/">Se connecter </a></p>
+        <p style="color: red"> {{ error }}</p>
+    <form class="signup-form" method="POST">
+        {% csrf_token %}
+      <div class="f-row input-wrapper">
+        <label class="inp">
+          <input type="text"  name="nom" required class="input-text" placeholder="&nbsp;">
+          <span class="label" >Nom  </span>
+{#          <span class="input-icon"><i class="fa-solid fa-address-card"></i></span>#}
+        </label>
+
+        <label class="inp">
+          <input type="text" name="prenom"  required class="input-text" placeholder="&nbsp;">
+          <span class="label">Prénom</span>
+         {#   <span class="input-icon"><i class="fa-solid fa-address-card"></i></span>#}
+        </label>
+      </div>
+        <div class="f-row input-wrapper">
+         <label class="inp">
+        <input type="email" name="email" required class="input-text" placeholder="&nbsp;">
+        <span class="label">Email</span>
+        {# <span class="input-icon"><i class="fa-solid fa-envelope"></i></span> #}
+      </label>
+
+        <label class="inp">
+          <input  type="tel"  name="num_tlfn"  required class="input-text" placeholder="&nbsp;" pattern="[0-9].{8,}" title="Veuillez vérifier votre numéro!">
+          <span class="label">Numéro de téléphone</span>
+          <!---<span class="input-icon"><i class="fa-solid fa-address-card"></i></span>-->
+        </label>
+      </div>
+
+        <label class="inp">
+          <input type="text" name="job_title"  required class="input-text" placeholder="&nbsp;">
+          <span class="label"> job title</span>
+         {# <span class="input-icon"><i class="fa-solid fa-address-card"></i></span> #}
+        </label>
+        <div class="f-row input-wrapper">
+      <label class="inp">
+        <input type="password"  name="password" class="input-text" required placeholder="&nbsp;" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Le mot de passe doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus" id="password">
+        <span class="label">Mot de passe </span>
+       {# <span class="input-icon input-icon-password" data-password><i class="fa-solid fa-eye"></i></span> #}
+      </label>
+         <label class="inp">
+        <input type="password"  name="confirm_password" required class="input-text" placeholder="&nbsp;" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Le mot de passe doit contenir au moins un chiffre et une lettre majuscule et minuscule, et au moins 8 caractères ou plus" id="password">
+        <span class="label">Confirmer le mot de passe </span>
+       {#  <span class="input-icon input-icon-password" data-password><i class="fa-solid fa-eye"></i></span>#}
+      </label>
+        </div>
+         <div class="f-row input-wrapper">
+        <label class="inp">
+          <input type="text" name="nom_entreprise" required class="input-text" placeholder="&nbsp;">
+          <span class="label" >Nom entreprise   </span>
+         {#  <span class="input-icon"><i class="fa-solid fa-address-card"></i></span> #}
+        </label>
+
+        <label class="inp">
+          <input type="text" name="secteur_act"  class="input-text " required placeholder="&nbsp;">
+          <span class="label">Secteur d'activité </span>
+        {#   <span class="input-icon"><i class="fa-solid fa-address-card"></i></span>#}
+        </label>
+      </div>
+        <label class="inp">
+        <input type="url" name="url" class="input-text" required placeholder="&nbsp;" id="password">
+        <span class="label">URL entreprise </span>
+       {# <span class="input-icon input-icon-password" data-password><i class="fa-solid fa-eye"></i></span> #}
+      </label>
+
+      <button class="btn btn-signup">S'inscrire</button>
+
+    </form>
+  </main>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style>
+        img {
+            margin-bottom: 50px;
+        }
+        .CVSS{
+            display: inline-block;
+        }
+        #one{
+            display: inline-block;
+        }
+        #two{
+            display: inline-block;
+        }
+        .CVSS3{
+            background-color: #f8f8f8;
+            width: 400px;
+            height: 400px;
+            border: black 5px;
+            border-radius: 15px;
+        }
+        .CVSS3 b {
+            margin-bottom: 30px;
+        }
+        .CVSS2{
+            background-color: #f8f8f8;
+            width: 400px;
+            height: 400px;
+            border: black 5px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+<img src="https://unidees.dz/wp-content/uploads/2020/01/unideescouleur-1024x343-1.png" alt="logo unidees" width="200"/>
+<nav>
+
+    <h1 style="font-size: 18pt; text-align: center">Rapport de vulnérabilité</h1>
+</nav>
+
+<br>
+<br>
+<br>
+<h2 style="font-size: 14pt">Vulnérabilité : {{ data.0.cve_id }}</h2>
+<p>
+    {% if data.0.titre == 'None' %}
+        <b style="font-size: 12pt">Titre:</b>
+        {{ data.0.titre }}
+        <br> <br>
+    {% endif %}
+</p>
+<p style="font-size: 12pt"><b>Actif affecté: </b > {{ actif_affec.nom_vendor }} {{ actif_affec.nom_actif }} (Version : {{ actif_affec.version_actif }} )</p><br><br>
+
+<b style="font-size: 12pt" >Description:</b><br>
+<p style="font-size: 12pt">{{ data.0.description }}</p>
+
+<div class="CVSS" style="font-size: 11pt">
+    <div id="one">
+        <h3 style="font-size: 13pt"> CVSS 2: </h3>
+        <div class="CVSS2" style="background-color: aliceblue">
+            <b>Score:</b> {{data.0.cvss2_score}} <br>
+            <b>Criticité:</b> {{ data.0.cvss2_sevirity }}<br>
+            <b>Vecteur:</b> {{ data.0.cvss2_vector_string }} <br>
+        </div>
+    </div>
+    <div id="two">
+        <h3 style="font-size: 13pt"> CVSS 3: </h3>
+        <div class="CVSS3" style="background-color: aliceblue">
+            <b>Score:</b> {{ data.0.cvss3_score }} <br>
+            <b>Criticité:</b> {{ data.0.cvss3_sevirity }} <br>
+            <b>Vecteur:</b> {{ data.0.cvss3_vector_string }} <br>
+        </div>
+    </div>
+
+</div>
+<div class="reference">
+    <h4 style="font-size: 12pt">Liens de référence :</h4>
+    {% for i in ref %}
+        <a href="{{ i.reference }}">{{ i.reference }}</a>
+    {% endfor %}
+</div>
+</body>
+</html>

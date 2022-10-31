@@ -1,0 +1,317 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+    <style>
+.button_valide_bloque
+{
+display:inline-block ;
+padding:0.3em 1.2em;
+margin:0 0.3em 0.3em ;
+border-radius:2em;
+    width: 90%;
+
+box-sizing: border-box;
+text-decoration:none;
+font-family:'Roboto',sans-serif;
+font-weight:300;
+border-width: 0px;
+text-align:center;
+}
+
+.notif_style{
+    font-size: 15px; text-align: left; position: relative; bottom: 5px;
+}
+</style>
+<head>
+  <meta charset="UTF-8">
+     <title> UniVeille - Dashboard inscrits</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+     <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'explorer.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'notif.css' %}" />
+
+
+
+
+</head>
+<body>
+
+<div id="navbar"  style="color: #1c64a1; height: 75px;  background: rgb(28,100,161);
+background: linear-gradient(90deg, rgba(28,100,161,1) 0%, rgba(2,0,36,1) 100%);">
+<div class="slide-menu">
+  <a class="logo" style="color: white; font-size: 17px; top:10px;">UniVeille </a>
+    <a href="" style="position: absolute; right: 100px;top:19px; color: white"> {% if user.is_authenticated %}
+                     <span> {{ user.username }}</span>
+                  {% else %}
+                       <span> user</span>
+                  {% endif %}</a>
+
+</div>
+</div>
+
+
+<div class="app" >
+	 <header style="z-index:10000000;">
+    <div class="topnav" id="myTopnav" style="z-index:0;">
+
+  <a class="logo" >UniVeille</a>
+    <a href="" style="position: absolute; right: 100px;top:4px;"> {% if user.is_authenticated %}
+                     <span> {{ user.username }}</span>
+                  {% else %}
+                       <span> user</span>
+                  {% endif %}</a>
+
+
+            <!-- Main Navbar -->
+            <span class="navbar navbar-light " >
+              <span class="navbar-nav"  >
+                <span class="nav-item  dropdown notifications" style="position: fixed; right: 50px ; top:5px; z-index: 10000000">
+                  <a class="nav-link nav-link-icon "  style=" color: whitesmoke; width: 30px ; height: 30px; "  href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="nav-link-icon__wrapper">
+                      <i class="material-icons">&#xE7F4;</i>
+                      <span class="badge badge-danger" style="color: white; position: fixed; right: 42px ; top:43px; background-color: red; font-size: 10px">{{ count.count }}</span>
+                    </div>
+                  </a>
+                   <div class="dropdown-menu  " aria-labelledby="dropdownMenuLink" style="height: 500px;width: 400px; color: black; margin-top: 50px;  overflow-y: scroll;" >
+                    <p id="message"></p>
+
+                      {% for notification in notifications_admin%}
+                            {% if  notification.checked == True %}
+                              <a class="dropdown-item notif_elem" id="{{notification.id_notif_admin}}" href="/dashboard/" data-id-actif="{{notification.id_notif_admin}}" style=" border:0.5mm solid  #e8e8e8;color: black;height: 90px;" >
+                              {% csrf_token %}
+                                <div class="notification__content notif_style"   >
+                                    <span class="notification__category"  >Nouvel utilisateur: </span > <span style="font-weight: bold"> <b>{{ notification.user_id.first_name }}  {{ notification.user_id.last_name }}</b></span>
+                                    <div ><span> Date :  <span style="font-weight: bold"><b>{{ notification.user_id.date_joined}}</b></span></span></div>
+                                 </div>
+
+                              </a>
+                            {% else %}
+                                <a class="dropdown-item notif_elem"  id="{{notification.id_notif_admin}}" href="/dashboard/" data-id-actif="{{notification.id_notif_admin}}" style=" border:0.5mm solid  #e8e8e8;background-color: #edeffc; color: black;height: 90px;" >
+                              {% csrf_token %}
+                                  <div class="notification__content notif_style"   >
+                                     <span class="notification__category"  >Nouvel utilisateur  : </span> <span style="font-weight: bold"> <b>{{ notification.user_id.first_name }}  {{ notification.user_id.last_name }}</b></span>
+                                      <div ><span> Date :  <span style="font-weight: bold"><b>{{ notification.user_id.date_joined}}</b></span></span></div>
+                                 </div>
+
+                              </a>
+                            {% endif %}
+
+                      {% endfor %}
+
+
+                  </div>
+                </span>
+
+
+              </span>
+              <nav class="nav">
+                <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
+                  <i class="material-icons">&#xE5D2;</i>
+                </a>
+              </nav>
+            </span>
+
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+</header>
+
+
+
+ <div class="app-body" style="width: 98%;  z-index: 0">
+
+		<div class="app-body-navigation" style="z-index: 0; width: 60px" >
+			<nav class="navigation"  style="left: 40px">
+                <br>
+            <br>
+                <div class="app-header-logo">
+                    <div class="logo">
+                        <span class="logo-icon">
+                            <img src="{% static 'CVE_BD/media/unideescouleur-1024x343-1.png' %}" />
+                        </span>
+
+                    </div>
+                </div>
+                <hr style="width:100%;text-align:left;margin-left:0;background-color:#c9c9c9 ; border-width: 2px">
+                <br>
+                <br>
+				<a href="/dashboard/">
+					<i class="ph-browsers"></i>
+					<span style="font-size: 19px;">Inscrits </span>
+				</a>
+				<a href="/dashboard_gerer-client/">
+					<i class="ph-check-square"></i>
+					<span style="font-size: 19px;">Abonnés</span>
+				</a>
+                <a href="/dashboard_entreprises/">
+					<i class="ph-check-square"></i>
+					<span style="font-size: 19px;">Entreprises</span>
+				</a>
+                <br>
+                <footer class="footer1">
+                    <hr style="width:100%;text-align:left;margin-left:0;background-color:black ; border-width: 2px">
+                  {% if user.is_authenticated %}
+                             <form action="{% url 'log_out'%}" method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class = "button_valide_bloque" style="background-color:#023873; color: white;" value="Déconnecter ">
+                                </form>
+
+                         {% endif %}
+                 <br>
+            <br>
+                </footer>
+
+			</nav>
+
+		</div>
+
+		<div class="app-body-main-content" style="position: center ; width: 100%;background-color: transparent; margin-left: 70px;">
+			<section class="service-section">
+
+                <div style=" color: black;">
+                    <!-- partial:index.partial.html -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<div class="container" id="no-more-tables" >
+<h3 class="titre" style="font-size: 28px">Dashboard - Gestion des nouveaux inscrits </h3>
+ <br>
+  <table class="table table-hover"  style="
+    width: 80%;  ">
+    <thead>
+      <tr class="active">
+        <th class="col-xs-2"><strong>Entreprise</strong></th>
+        <th class="col-xs-2"><strong>Employé</strong></th>
+        <th class="col-xs-4"><strong>Adresse mail</strong></th>
+        <th class="col-xs-2"><strong>Date d'ajout  </strong></th>
+          <th class="col-xs-2"><strong>Modifié le </strong></th>
+        <th class="col-xs-2"><strong>Etat</strong></th>
+        <th class="col-xs-2"><strong>Action</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+     <p style="text-color:black">
+      {% for parcours in all_visiteurs %}
+          {% for visiteur in parcours  %}
+              <form method="POST" action="/dashboard/">
+              {% csrf_token %}
+              <tr >
+
+                    <td data-title="Entreprise" role="button" data-toggle="collapse" href="#{{ visiteur.nom }}" aria-expanded="false" aria-controls="demo1">{{ visiteur.nom_entreprise_id }}</td>
+                    <td data-title="Employé" role="button" data-toggle="collapse" href="#{{ visiteur.nom }}" aria-expanded="false" aria-controls="demo1">{{ visiteur.nom }}</td>
+                    <td data-title="Adresse mail" role="button" data-toggle="collapse" href="#{{ visiteur.nom }}" aria-expanded="false" aria-controls="demo1">{{ visiteur.email}}</td>
+                    <td data-title="Date d'ajout" role="button" data-toggle="collapse" href="#{{ visiteur.nom }}" aria-expanded="false" aria-controls="demo1">{{ visiteur.date_ajout_em}}</td>
+                    <td data-title="Modifié le" role="button" data-toggle="collapse" href="#{{ visiteur.nom }}" aria-expanded="false" aria-controls="demo1">{{ visiteur.date_modif_statut}}</td>
+                    {% if visiteur.valide %}
+                        <td data-title ="Etat" ><input  type="submit" name="validite" disabled="disabled" value="Valider" style=" background-color: lightgray; "  class ="button_valide_bloque" ></td>
+                        <td data-title ="Action"><input  type="submit" name="validite" value="Bloquer" style="background-color:#ef0f0f; color: white;  " class ="button_valide_bloque"  ></td>
+                        <input  type="hidden" name="user" value="{{ visiteur.email }}"  >
+                        <input  type="hidden" name="id_user" value="{{ visiteur.user_id.id }}"  >
+                        {% else %}
+                            {% if visiteur.valide == False  %}
+                                <td data-title ="Etat "> <i style="font-size:24px; color:red" class="fa">&#xf00d;</i></td>
+                                <td data-title ="Action "><input type="submit" name="validite" value="Valider" style="background-color: #20c770 ; color: white;border-collapse: separate; " class ="button_valide_bloque" ></td>
+                                <input  type="hidden" name="user" value="{{ visiteur.email }}"  >
+                                <input  type="hidden" name="id_user" value="{{ visiteur.user_id.id }}"  >
+
+                                {% else %}
+                                <td data-title ="Etat" style="color: black"> - </td>
+                                <td data-title ="Action"><input type="submit" name="validite" value="Valider" style="background-color: #20c770 ; color: white; " class ="button_valide_bloque" >
+                                <input  type="submit" name="validite" value="Bloquer" style="background-color:#ef0f0f; color: white;"  class ="button_valide_bloque" ></td>
+                                <input  type="hidden" name="user" value="{{ visiteur.email }}"  >
+                                <input  type="hidden" name="id_user" value="{{ visiteur.user_id.id }}"  >
+
+                            {% endif %}
+
+                    {% endif %}
+
+              </tr>
+              <tr>
+                    <td colspan="6" class="hiddenRow">
+                      <div class="collapse" id="{{ visiteur.nom }}">
+                        <table class="table table-nested">
+                          <tbody>
+                            <tr>
+                              <td class="col-xs-4 col-sm-2 active"><strong>secteur d'activité de l'entreprise </strong></td>
+                              <td>{{ visiteur.nom_entreprise.secteur_activité_en }} </td>
+                            </tr>
+                            <tr>
+                              <td class="col-xs-4 col-sm-2 active"><strong>URL de l'entreprise</strong></td>
+                              <td>
+                                {{ visiteur.nom_entreprise.url_en }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-xs-4 col-sm-2 active"><strong>Date d'ajout de l'entreprise</strong></td>
+                              <td>
+                                {{ visiteur.nom_entreprise.date_ajout_en }}
+                              </td>
+                            </tr>
+                            <tr>
+                              <td class="col-xs-4 col-sm-2 active" ><strong>Intitulé de poste de l'employé  </strong></td>
+                              <td>
+                                {{ visiteur.job_title }}
+                              </td>
+                            </tr>
+                             <tr>
+                              <td class="col-xs-4 col-sm-2 active" ><strong>Numéro de téléphone de l'employé </strong></td>
+                              <td>
+                                {{ visiteur.num_tel }}
+                              </td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </td>
+                  </tr>
+        </form>
+          {% endfor %}
+      {% endfor %}
+  </p>
+
+    </tbody>
+  </table>
+</div>
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.js'></script>
+                </div>
+
+
+ 		</section>
+
+	</div>
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+    $('.notif_elem').click(function(){
+    var id;
+    id = $(this).attr("data-id-actif");
+
+    $.ajax(
+    {
+        type:"GET",
+        url: "/dashboard_gerer-client",
+        data:{
+                 identifiant: id
+        },
+        success: function( data )
+        {
+            location.href ="/dashboard/"
+        }
+     })
+});
+</script>
+
+
+
+</body>
+<script src="{% static '/page_presentative.js' %}" type="text/javascript"></script>
+</html>

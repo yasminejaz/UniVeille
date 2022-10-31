@@ -1,0 +1,60 @@
+
+body{
+  height: 100%;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background: transparent;
+
+}
+.login-form{
+  position: absolute;
+  color: black;
+  top:1%;
+  left:50%;
+  margin-top: 40px;
+  margin-left:-420px;
+  width:50%;
+  visibility:hidden;
+  opacity: 0;
+}
+
+.login-form:target{
+  top:10%;
+  visibility: visible;
+  opacity: 1;
+  transition:all 1s ease;
+}
+
+
+.trash{
+   position : center; padding: 6px 8px;  position: absolute; top :3%; right: 3%;
+
+}
+.modification{
+   position : center; padding: 6px 8px;  position: absolute; top :3%; right: 7%;
+
+}
+
+
+.btn_close_notif {
+  background-color: transparent;
+  border: none;
+  color: gray;
+  padding: 12px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  right: 0%;
+  top: 0%;
+
+}
+
+
+.see_option {
+  padding: 6px 8px;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
+

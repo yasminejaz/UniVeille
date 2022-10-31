@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet' href='//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'>
+    <link rel="stylesheet" type="text/css" href="{% static 'admin.css' %}" />
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<div class="container" id="no-more-tables">
+  <p>&nbsp;</p>
+  <table class="table table-hover" style="width: 50%">
+    <thead>
+      <tr class="active">
+        <th class="col-xs-2"><strong>Entreprise</strong></th>
+        <th class="col-xs-2"><strong>Employé</strong></th>
+        <th class="col-xs-6"><strong>Adresse mail</strong></th>
+        <th class="col-xs-2"><strong>Date </strong></th>
+        <th class="col-xs-2"><strong>Status</strong></th>
+        <th class="col-xs-2"><strong>Action</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr role="button" data-toggle="collapse" href="#demo1" aria-expanded="false" aria-controls="demo1">
+        <td data-title="Entreprise">12345</td>
+        <td data-title="Employé">12/05/2015</td>
+        <td data-title="Adresse mail">A plumbing job</td>
+        <td data-title="Date">01/06/2015</td>
+          <td data-title ="Status"><button style="background-color: #00ff70">  Valider </button></td>
+           <td data-title ="Action"><button style="background-color: #ff0000">  Bloquer </button></td>
+      </tr>
+      <tr>
+        <td colspan="6" class="hiddenRow">
+          <div class="collapse" id="demo1">
+            <table class="table table-nested">
+              <tbody>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active"><strong>Description</strong></td>
+                  <td>07777 123456 ferroli flashing fault 37 no htg or hot water gas boiler no alt form of hot water</td>
+                </tr>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active"><strong>Action taken</strong></td>
+                  <td>
+                    The work was completed by the contractor on 04-FEB-2013
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active"><strong>Contractor name</strong></td>
+                  <td>
+                    PMD North West
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active" rowspan="2"><strong>Job lines</strong></td>
+                  <td>
+                    1. Gutter:Clean/Flush Out(Per Elev) Gutter
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    2. Inspection:Provide/Erect Ladder Inspection
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+      <tr role="button" data-toggle="collapse" href="#demo2" aria-expanded="false" aria-controls="demo2">
+        <td data-title="WO Ref">67890</td>
+        <td data-title="Reported">20/04/2015</td>
+        <td data-title="Type">An electrical job</td>
+        <td data-title="Completed">01/05/2015</td>
+      </tr>
+      <tr>
+        <td colspan="6" class="hiddenRow">
+          <div class="collapse" id="demo2">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active"><strong>Description</strong></td>
+                  <td>07777 123456 ferroli flashing fault 37 no htg or hot water gas boiler no alt form of hot water</td>
+                </tr>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active"><strong>Action taken</strong></td>
+                  <td>
+                    The work was completed by the contractor on 04-FEB-2013
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active"><strong>Contractor name</strong></td>
+                  <td>
+                    PMD North West
+                  </td>
+                </tr>
+                <tr>
+                  <td class="col-xs-4 col-sm-2 active" rowspan="2"><strong>Job lines</strong></td>
+                  <td>
+                    1. Gutter:Clean/Flush Out(Per Elev) Gutter
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    2. Inspection:Provide/Erect Ladder Inspection
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/js/bootstrap.js'></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+.heading {
+    background-color: black;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 30px  30px;
+    font-size: 20px;
+    text-transform: uppercase;
+
+}
+.gras{
+    font-weight: bold;
+    font-size: 17px;
+}
+
+table  {
+  width: 100%;
+  border: 2px solid;
+}</style>
+
+<title>veille des vulnerabilités </title>
+</head>
+<body>
+
+<div class="row">
+    <div class="heading"><h3>Veille des vulnerabilités</h3></div>
+</div>
+<br>
+<table>
+ <div>
+<tr>
+
+    <td><h3>{{ cve.0.cve_id }}</h3></td>
+    <td>
+        <div><span class="gras">Source: </span>{{ cve.0.source}}</div>
+        <div><span class="gras">CVSS2: </span>{{ cve.0.cvss2_score}}</div>
+        <div><span class="gras">CVSS3: </span>{{ cve.0.cvss3_score}}</div>
+    </td>
+
+</tr>
+
+  <tr>
+    <td>{{ cve.0.description}} <br><br> </td>
+  </tr>
+
+  <tr>
+    <td>
+         <div><span class="gras">Date de publication:  </span>{{ cve.0.date_publication}}</div>
+    </td>
+  </tr>
+
+ </div>
+
+  <tr>
+
+    <tr><td><p class="gras">CWE : </p></td></tr>
+     <td>
+       {%for y in cwe%}
+        {{ y.cwe_id }} :
+        {{ y.cwe_id.title}}
+        <br>
+        {% endfor %}
+     </td>
+
+  </tr>
+
+    <tr>
+    <tr><td><p class="gras">References : </p></td></tr>
+    <td>
+        {%for x in ref%}
+        {{ x.reference }}
+        <br>
+        {% endfor %}
+    </td>
+
+  </tr>
+
+  <tr>
+  <tr><td><p class="gras">CPE : </p></td></tr>
+    <td>
+       {%for y in prod%}
+        {{ y.cpe}}
+        <br>
+        {% endfor %}
+    </td>
+
+  </tr>
+
+
+</table>
+
+</body>
+</html>

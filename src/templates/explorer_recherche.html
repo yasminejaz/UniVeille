@@ -1,0 +1,209 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+
+<style>
+    .button_valide_bloque
+{
+display:inline-block ;
+padding:0.3em 1.2em;
+margin:0 0.3em 0.3em 0;
+border-radius:2em;
+box-sizing: border-box;
+text-decoration:none;
+font-family:'Roboto',sans-serif;
+font-weight:300;
+border-width: 0px;
+text-align:center;
+}
+.pagination {
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination a {
+    text-decoration: none;
+}
+
+.pagination-number {
+    padding: 12px 17px;
+    border-radius: 10px;
+    color: darkblue;
+    background-color: white;
+}
+
+.pagination-number:hover,
+.pagination-current {
+    color: white;
+    background-color: #012144;
+}
+
+.pagination-action {
+    margin: 0 2px;
+    display: flex;
+    padding: 1px 2px;
+    color: darkblue;
+    font-size: 1.3em;
+    align-items: center;
+}
+
+</style>
+<head>
+
+
+  <meta charset="UTF-8">
+  <title> UniVeille - Rechercher une vulnérabilité</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'explorer.css' %}" />
+
+
+</head>
+<body>
+
+<div id="navbar">
+<div class="slide-menu">
+  <a class="logo">UNIDEES</a>
+  <a href="/accounts/signup/">S'inscrire</a>
+  <a href="/login/">Se connecter </a>
+  <a href="#">Explorer</a>
+   <a href="/" class="active">Accueil</a>
+</div>
+</div>
+
+
+<div class="app" style="color: black ;">
+    <header>
+    <div class="topnav" id="myTopnav">
+  <a class="logo">UNIDEES</a>
+   <a href="/accounts/signup/">S'inscrire</a>
+   <a href="/login/">Se connecter </a>
+  <a href="/explorer/">Explorer</a>
+   <a href="/" class="active">Accueil</a>
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+</header>
+		<div class="app-body-main-content">
+			<section class="service-section">
+            <br>
+            <br>
+				<h3 class="titre">Liste des vulnérabilités</h3>
+
+                <br>
+
+                <div>
+                 <form action="/explorer_recherche/" method="POST" >
+                        {%csrf_token%}
+                        <div class="service-section-header">
+
+                            <div class="search-field">
+                                <i class="ph-magnifying-glass"></i>
+                                <input type="text"  required placeholder="Recherche ..." name="search">
+                            </div>
+                            <div class="dropdown-field">
+                                <select id="filtre" name="filtre">
+                                    <option value="CVE">Filtre</option>
+                                    <option value="CVE">CVE ID</option>
+
+
+                                </select>
+                                <i class="ph-caret-down"></i>
+                            </div>
+                            <button class="flat-button" style="background-color:#012144">
+                                Recherche
+                            </button>
+
+                    </div>
+                 </form>
+
+                    <br>
+                </div>
+                {%for donnee in page_obj %}
+
+                    <div class="tiles">
+                        <article class="tile">
+                             <a href="{% url 'Explorer' cve_id=donnee.cve_id  %}" >
+                                  <div class="tile-header" style="font-weight: normal">
+                                <table >
+                                  <tr>
+                                    <td style ="width: 150px "><span style="font-weight: bold; color: #1c64a1"> {{ donnee.cve_id }} </span><br>
+                                        <span style="font-size: 13px"> <span style="font-weight: bold;"> CVSS2: {{ donnee.cvss2_score }},
+                                            {% if donnee.cvss2_sevirity == 'HIGH' %}
+                                            <span style=" padding: 3px 3px ;background-color: red">{{ donnee.cvss2_sevirity }} </span><br>
+                                                {% else %}
+                                                    {% if donnee.cvss2_sevirity == 'MEDIUM' %}
+                                                        <span style=" padding: 3px 3px ;background-color: orange">{{ donnee.cvss2_sevirity }} </span><br>
+                                                    {% else %}
+                                                        {% if donnee.cvss2_sevirity == 'LOW' %}
+                                                            <span style=" padding: 3px 3px ;background-color: yellow">{{ donnee.cvss2_sevirity }} </span><br>
+                                                        {% else %}
+                                                            {% if donnee.cvss2_sevirity == 'CRITICAL' %}
+                                                                <span style=" padding: 3px 3px ;background-color: black; color: lightgray"  >{{ donnee.cvss2_sevirity }} </span><br>
+                                                            {% else %}
+                                                                <span style=" padding: 3px 3px ;" >{{ donnee.cvss2_sevirity }} </span><br>
+                                                            {% endif %}
+
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                            {% endif %}
+                                        </span></span>
+                                         <span style="font-size: 13px"> <span style="font-weight: bold;"> CVSS3: {{ donnee.cvss3_score }},
+                                             {% if donnee.cvss3_sevirity == 'HIGH' %}
+                                                <span style=" padding: 3px 3px ;background-color: red">{{ donnee.cvss3_sevirity }} </span><br>
+                                                    {% else %}
+                                                        {% if donnee.cvss3_sevirity == 'MEDIUM' %}
+                                                            <span style=" padding: 3px 3px ;background-color: orange">{{ donnee.cvss3_sevirity }} </span><br>
+                                                        {% else %}
+                                                            {% if donnee.cvss3_sevirity == 'LOW' %}
+                                                                <span style=" padding: 3px 3px ;background-color: yellow">{{ donnee.cvss3_sevirity }} </span><br>
+                                                            {% else %}
+                                                                {% if donnee.cvss3_sevirity == 'CRITICAL' %}
+                                                                <span style=" padding: 3px 3px ;background-color: black; color: lightgray"  >{{ donnee.cvss3_sevirity }} </span><br>
+                                                            {% else %}
+                                                                <span style=" padding: 3px 3px ;" >{{ donnee.cvss3_sevirity }} </span><br>
+                                                            {% endif %}
+
+                                                            {% endif %}
+                                                        {% endif %}
+
+                                                {% endif %}
+                                         </span></span>
+                                    </td>
+                                    <td  style="width: 750px; " >
+
+                                      <span style="font-weight: bold;">Despription: </span> <span class ="limiter_desc" > &emsp;{{ donnee.description }} </span><br>
+
+                                        <span style="position:absolute; bottom:15px;"><span style="font-weight: bold;">Date de publication: </span>{{ donnee.date_publication }}</span>
+                                    </td>
+
+                                  </tr>
+
+
+                                </table>
+                            </div>
+
+                             </a>
+
+                        </article>
+                    </div>
+
+                    <br>
+                {% endfor %}
+
+
+			</section>
+		</div>
+
+<br>
+<br>
+
+	</div>
+
+
+
+<script src="{% static '/page_presentative.js' %}" type="text/javascript"></script>
+</body>
+</html>

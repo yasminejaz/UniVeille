@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" >
+
+<style>
+    .button_valide_bloque
+{
+display:inline-block ;
+padding:0.3em 1.2em;
+margin:0 0.3em 0.3em 0;
+border-radius:2em;
+box-sizing: border-box;
+text-decoration:none;
+font-family:'Roboto',sans-serif;
+font-weight:300;
+border-width: 0px;
+text-align:center;
+}
+.pagination {
+    display: flex;
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination a {
+    text-decoration: none;
+}
+
+.pagination-number {
+    padding: 12px 17px;
+    border-radius: 10px;
+    color: darkblue;
+    background-color: white;
+}
+
+.pagination-number:hover,
+.pagination-current {
+    color: white;
+    background-color: #012144;
+}
+
+.pagination-action {
+    margin: 0 2px;
+    display: flex;
+    padding: 1px 2px;
+    color: darkblue;
+    font-size: 1.3em;
+    align-items: center;
+}
+
+.sous_titre1{
+    word-break: normal; font-weight: bold; font-size: 19px;
+}
+.sous_titre{
+     font-size: 15px; color: black; position:absolute;
+}
+</style>
+<head>
+
+
+  <meta charset="UTF-8">
+  <title>UniVeille - Explorer vulnérabilité</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'explorer.css' %}" />
+
+
+</head>
+<body>
+
+<div id="navbar">
+<div class="slide-menu">
+  <a class="logo">UniVeille</a>
+  <a href="/accounts/signup/">S'inscrire</a>
+  <a href="/login/">Se connecter </a>
+  <a href="#">Explorer</a>
+   <a href="/" class="active">Accueil</a>
+</div>
+</div>
+
+
+<div class="app" style="color: black ;">
+    <header>
+    <div class="topnav" id="myTopnav">
+  <a class="logo">UniVeille</a>
+   <a href="/accounts/signup/">S'inscrire</a>
+   <a href="/login/">Se connecter </a>
+  <a href="/explorer/">Explorer</a>
+   <a href="/" class="active">Accueil</a>
+  <a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+</div>
+</header>
+		<div class="app-body-main-content">
+			<section class="service-section">
+            <br>
+            <br>
+				<h3 class="titre" style="width: 67%;padding-left: 40px;">La  vulnerabilité : {{cve.0.cve_id }} </h3>
+                <br>
+                <div class="tiles" style="width: 67%;padding-left: 40px;">
+                    <article class="tile" style="padding-left: 40px;">
+                        <div class="tile-header" style="font-weight: normal; ">
+                         <span style="font-weight: bold; font-size: 22px; color: #1c64a1"> {{cve.0.cve_id }}</span>
+
+                        </div>
+                    <br>
+                    <span class="sous_titre" style="font-weight: bold; top: 25px; left: 620px ">Source: </span><span class="sous_titre" style="top: 25px; color: black; position:absolute; left: 685px "> {{ cve.0.source }}</span>
+                    <span class="sous_titre" style="font-weight: bold; ;top: 50px; left: 620px ">CVSS2:</span><span class="sous_titre" style="top: 50px;color: black; position:absolute; left: 685px; "> {{cve.0.cvss2_score }}
+
+                     <span class="sous_titre" >
+                                            {% if cve.0.cvss2_sevirity == 'HIGH' %}
+                                            <span style=" padding: 3px 3px ;background-color: red; margin-left: 10px;">{{ cve.0.cvss2_sevirity }} </span><br>
+                                                {% else %}
+                                                    {% if cve.0.cvss2_sevirity == 'MEDIUM' %}
+                                                        <span style=" padding: 3px 3px ;background-color: orange; margin-left: 10px;">{{ cve.0.cvss2_sevirity }} </span><br>
+                                                    {% else %}
+                                                        {% if cve.0.cvss2_sevirity == 'LOW' %}
+                                                            <span style=" padding: 3px 3px ;background-color: yellow;margin-left: 10px;">{{ cve.0.cvss2_sevirity }} </span><br>
+                                                        {% else %}
+                                                            {% if cve.0.cvss2_sevirity == 'CRITICAL' %}
+                                                                <span style=" padding: 3px 3px ;background-color: black; color: lightgray; margin-left: 10px;"  >{{cve.0.cvss2_sevirity }} </span><br>
+                                                            {% else %}
+                                                                <span style=" padding: 3px 3px ;" >{{ cve.0.cvss2_sevirity }} </span><br>
+                                                            {% endif %}
+
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                            {% endif %}
+                                        </span>
+                    </span>
+                    <span class="sous_titre" style="font-weight: bold;top: 75px; left: 620px ">CVSS3: </span><span class="sous_titre" style=" top: 75px;color: black; position:absolute; left: 685px  "> {{cve.0.cvss3_score }}
+                     {% if cve.0.cvss3_sevirity == 'HIGH' %}
+                                            <span style=" padding: 3px 3px ;background-color: red;margin-left: 10px;">{{ cve.0.cvss3_sevirity }} </span><br>
+                                                {% else %}
+                                                    {% if cve.0.cvss3_sevirity == 'MEDIUM' %}
+                                                        <span style=" padding: 3px 3px ;background-color: orange; margin-left: 10px;"> {{ cve.0.cvss3_sevirity }} </span><br>
+                                                    {% else %}
+                                                        {% if cve.0.cvss3_sevirity == 'LOW' %}
+                                                            <span style=" padding: 3px 3px ;background-color: yellow; margin-left: 10px;"> {{ cve.0.cvss3_sevirity }} </span><br>
+                                                        {% else %}
+                                                            {% if cve.0.cvss3_sevirity == 'CRITICAL' %}
+                                                                <span style=" padding: 3px 3px ;background-color: black; color: lightgray; margin-left: 10px;"  > {{cve.0.cvss3_sevirity }} </span><br>
+                                                            {% else %}
+                                                                <span style=" padding: 3px 3px ;" > {{ cve.0.cvss3_sevirity }} </span><br>
+                                                            {% endif %}
+
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                            {% endif %}
+                    </span>
+                    <span class="sous_titre" style="font-weight: bold;top: 65px; padding-left: 0px;">Date de publication: </span><span class="sous_titre" style=" top: 65px; padding-left: 150px;"> {{cve.0.date_publication }}</span>
+                    <span  class="sous_titre" style="font-weight: bold; top: 85px; padding-left: 0px;">Date de modification: </span><span class="sous_titre" style=" top: 85px;padding-left: 157px;"> {{cve.0.date_modification }}</span>
+
+                    <br>
+                    <br>
+                    <br>
+                        <div  >
+                            <div class="sous_titre1"> Description </div>
+                             <div style="word-break: normal; width :95%"> {{cve.0.description }} </div>
+
+                        </div>
+                    <br>
+                         <div  >
+                            <div class="sous_titre1"> CWE </div>
+                             <div style="word-break: normal; width :95%">
+                                 {%for donnee in cwe%}
+                                 <span style=" text-decoration: underline; font-size: 15px; " >{{ donnee.cwe_id }}:</span>
+                                {{ donnee.cwe_id.title}}
+                                <br>
+                            {% endfor %}
+                             </div>
+
+                        </div>
+
+
+
+                    <br>
+
+                     <div  >
+                            <div class="sous_titre1"> Reference  </div>
+
+                             <div style="word-break: normal; width :95%">
+                                 {%for donnee in ref%}
+                                  <span style=" font-size: 15px;  font-weight: normal" > {{ donnee.reference }}</span>
+                                {{ donnee.cwe_id.title}}
+
+                            {% endfor %}
+                             </div>
+
+                        </div>
+                    <br>
+
+                     <div  >
+                            <div class="sous_titre1"> CPE </div>
+                             <div style="word-break: normal; width :95%">
+                                 {%for donnee in prod%}
+                                 <span style=" font-size: 15px; " > {{ donnee.cpe}}</span>
+                                {{ donnee.cwe_id.title}}
+                                <br>
+                            {% endfor %}
+                             </div>
+
+                        </div>
+
+
+                    <br>
+
+                    </article>
+                </div>
+
+
+            </section>
+		</div>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+	</div>
+
+
+
+<script src="{% static '/page_presentative.js' %}" type="text/javascript"></script>
+</body>
+</html>
