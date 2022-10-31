@@ -22,14 +22,14 @@ Notre solution collecte les informations sur les vulnérabilités de huits sourc
    ![Schema_image](images/source.png)
    
   ### Données sur UNE vulnérabilité:
-    . CVE ID,
-    . Source,
-    . CWE ID,
-    . CVSS 2,
-    . CVSS 3,
-    . Description,
-    . Produit(s) affecté(s),
-    . Date publication / modification.
+    -> CVE ID,
+    -> Source,
+    -> CWE ID,
+    -> CVSS 2,
+    -> CVSS 3,
+    -> Description,
+    -> Produit(s) affecté(s),
+    -> Date publication / modification.
     
    ![Schema_image](images/explorer2.png)
 
