@@ -1,6 +1,4 @@
 # UniVeille
-Plateforme de veille de vulnérabilités.
-
 
 Univeille est une plateforme Web de veille de vulnérabilités afin de notifier les entreprises clientes en amont et en continu des nouvelles vulnérabilités de sécurité qui risquent d'affecter leurs actif applicatifs et améliorer leurs processus de gestion de vulnérabilités.
 
