@@ -22,7 +22,7 @@ Notre solution collecte les informations sur les vulnérabilités de huits sourc
    
    /* Schema source */
    
-  # Données sur UNE vulnérabilité:
+  ### Données sur UNE vulnérabilité:
     . CVE ID,
     . Source,
     . CWE ID,
